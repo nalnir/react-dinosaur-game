@@ -4,6 +4,25 @@
 
 import React from 'react';
 
+import cloud from './img/cloud.png'; // eslint-disable-line import/no-webpack-loader-syntax
+import ground from './img/ground.png'; // eslint-disable-line import/no-webpack-loader-syntax
+import obstacle from './img/obstacle.png'; // eslint-disable-line import/no-webpack-loader-syntax
+
+import motocross from './img/motocross.png'; // eslint-disable-line import/no-webpack-loader-syntax
+import motocrossDown from './img/motocross-down.png'; // eslint-disable-line import/no-webpack-loader-syntax
+import motocrossUp from './img/motocross-up.png'; // eslint-disable-line import/no-webpack-loader-syntax
+import motocrossDie from './img/motocross-death.png'; // eslint-disable-line import/no-webpack-loader-syntax
+
+import santa from './img/santa.png';
+import santaDown from './img/santa-down.png'
+import santaUp from './img/santa-up.png'
+import santaDie from './img/santa-die.png'
+
+import frikki from './img/frikki.png';
+import frikkiDown from './img/frikki-down.png'
+import frikkiUp from './img/frikki-up.png'
+import frikkiDie from './img/frikki-die.png'
+
 const STATUS = {
   STOP: 'STOP',
   START: 'START',
@@ -27,6 +46,9 @@ export default class Game extends React.Component {
     };
 
     // 资源文件
+    var currentDate = new Date();
+    var currentMonth = currentDate.getMonth();
+
     let skyImage = new Image();
     let groundImage = new Image();
     let playerImage = new Image();
@@ -39,13 +61,30 @@ export default class Game extends React.Component {
     groundImage.onload = onImageLoaded;
     playerImage.onload = onImageLoaded;
 
-    skyImage.src = require('url-loader!./img/cloud.png');
-    groundImage.src = require('url-loader!./img/ground.png');
-    playerImage.src = require('url-loader!./img/dinosaur.png');
-    playerLeftImage.src = require('url-loader!./img/dinosaur_left.png');
-    playerRightImage.src = require('url-loader!./img/dinosaur_right.png');
-    playerDieImage.src = require('url-loader!./img/dinosaur_die.png');
-    obstacleImage.src = require('url-loader!./img/obstacle.png');
+    skyImage.src = cloud;
+    groundImage.src = ground;
+    playerImage.src = motocross;
+    playerLeftImage.src = motocrossDown;
+    playerRightImage.src = motocrossUp;
+    playerDieImage.src = motocrossDie;
+    obstacleImage.src = obstacle;
+
+    if(currentMonth === 0 || currentMonth === 1 || currentMonth === 2 || currentMonth === 11) {
+      playerImage.src = santa;
+      playerLeftImage.src = santaDown;
+      playerRightImage.src = santaUp;
+      playerDieImage.src = santaDie;
+    } else if (currentMonth === 3 || currentMonth === 4 || currentMonth === 5 || currentMonth === 6) {
+      playerImage.src = motocross;
+      playerLeftImage.src = motocrossDown;
+      playerRightImage.src = motocrossUp;
+      playerDieImage.src = motocrossDie;
+    }  else {
+      playerImage.src = frikki;
+      playerLeftImage.src = frikkiDown;
+      playerRightImage.src = frikkiUp;
+      playerDieImage.src = frikkiDie;
+    }
 
     this.options = {
       fps: 60,
